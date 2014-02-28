@@ -3,6 +3,8 @@ TodoApp
 
 A simple Todo Application made with Angular.js (client side) and Flask as Server.
 
+[Demo Server](http://143.225.204.60:3000/)
+
 ## Requirements
 - Sqlite
 - Python
@@ -36,7 +38,3 @@ A simple Todo Application made with Angular.js (client side) and Flask as Server
 ├── tests.py
 └── todoapp.py						< Flask Main File >
 ```
-
-
-
-
