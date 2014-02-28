@@ -25,4 +25,4 @@ if __name__ == '__main__':
     if args.init:
         init()
     else:
-        app.run()
+        app.run(host='0.0.0.0', port=3000)  # I like port 3000 :)
