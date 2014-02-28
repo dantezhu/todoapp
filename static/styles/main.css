@@ -17,7 +17,7 @@ input[type=checkbox].custom-checkbox {
     border: 0;
 }
 input[type=checkbox].custom-checkbox + label.custom-label {
-    padding-left: 20px;
+    padding-left: 22px;
     height: 22px;
     display:inline-block;
     line-height: 22px;
