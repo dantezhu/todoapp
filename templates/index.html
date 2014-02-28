@@ -9,55 +9,51 @@
     <title>Todos ✓</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="/static/lib/bootstrap-theme-white-plum/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="/static/lib/animate.css/animate.css" />
     <link rel="stylesheet" href="/static/styles/main.css">
+    <link rel="stylesheet" href="/static/styles/custom.css">
   </head>
   <body ng-app="todoWebApp">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div class="container" ng-controller="TodosCtrl" style="width: 600px">
+    <div class="container" ng-controller="TodosCtrl">
         <div class="panel panel-default">
-            <header class="panel-heading">
-                <div class="close">
-                    <label ng-bind="itemsLeftCounter"></label> remaining tasks
-                </div>
-                <h1>Todos ✓</h1>
-                <input id="newTodo" type="text" ng-enter="addTodo()" ng-model="newTodo"
-                       placeholder="What's up?" class="form-control">
-            </header>
-            <section class="panel-body">
-                <div class="btn-toolbar filters" style="text-align: center;">
-                    <div class="btn-group">
-                      <button type="button" ng-click="selectedFilter = 'all'" class="btn btn-default" ng-class="{active: selectedFilter == 'all'}">All</button>
-                      <button type="button" ng-click="selectedFilter = 'active'" class="btn btn-default" ng-class="{active: selectedFilter == 'active'}">Active</button>
-                      <button type="button" ng-click="selectedFilter = 'completed'" class="btn btn-default" ng-class="{active: selectedFilter == 'completed'}">Completed</button>
+            <h1 class="title">Todos ✓</h1>
+            <div class="panel-body">
+                <form class="form form-horizontal">
+                    <div class="form-group">
+                        <div class="col-xs-10 col-sm-8 col-lg-10">
+                            <input type="text" ng-enter="addTodo()" ng-model="newTodo"
+                                   placeholder="What needs to be done?" class="form-control new-todo">
+                        </div>
+                        <button class="btn col-xs-2 col-sm-2 col-lg-2 add-todo-button">Add Todo</button>
                     </div>
-                </div>
-
-                <div class="list-group">
-                    <div class="list-group-item" ng-repeat="item in items" ng-hide="(selectedFilter == 'active' && item.done == true)
-                        || (selectedFilter == 'completed' && item.done == false)">
-                        <section>
-                            <span class="close" ng-click="removeTodo(item.id, $index)">×</span>
-                            <label>
-                                <input type="checkbox" ng-model="item.done" ng-click="toggleTodo(item.id, $index)">
-                            </label>
-                            <label ng-bind="item.task" ng-dblclick="editTodo(item.id)" ng-class="{done: item.done}"
-                                  ng-hide="editingTodo === item.id"></label>
-                            <input ng-show="editingTodo === item.id" class="edit form-control" ng-model="item.task"
-                                   ng-escape="closeEditingTodo()" ng-enter="doneEditingTodo(item.id, $index)"
-                                    ng-blur="doneEditingTodo(item.id, $index)">
-                        </section>
-                    </div>
-                </div>
+                </form>
+                <table class="table table-striped todos-list">
+                    <tr ng-repeat="item in items" ng-mouseenter="showCross = true" ng-mouseleave="showCross = false">
+                        <td ng-hide="(selectedFilter == 'active' && item.done == true)
+                            || (selectedFilter == 'completed' && item.done == false)">
+                        <span class="close" ng-click="removeTodo(item.id, $index)" ng-show="showCross">×</span>
+                        <input ng-id="item.id" class="custom-checkbox" type="checkbox" ng-model="item.done">
+                        <label class="custom-label" ng-for="item.id" ng-click="toggleTodo(item.id, $index)"></label>
+                            <span ng-bind="item.task" ng-dblclick="editTodo(item.id)" ng-class="{done: item.done}"
+                              ng-hide="editingTodo === item.id"></span>
+                        <input ng-show="editingTodo === item.id" class="edit form-control" ng-model="item.task"
+                               ng-escape="closeEditingTodo()" ng-enter="doneEditingTodo(item.id, $index)"
+                                ng-blur="doneEditingTodo(item.id, $index)">
+                        </td>
+                    </tr>
+                </table>
                 <small style="color: #a9a9a9">Double Click to edit a Task</small>
-            </section>
-            <footer class="panel-footer">
-                <a id="clear-done" ng-click="clearCompleted()">Clear completed tasks</a> (<label ng-bind="items.length - itemsLeftCounter"></label>)
-            </footer>
+            </div>
+            <div class="panel-footer">
+{#                <a id="clear-done" ng-click="clearCompleted()">Clear completed tasks</a> (<label ng-bind="items.length - itemsLeftCounter"></label>)#}
+                <span class="pull-right"><a ng-click="markAllComplete()" href="">Mark all as complete</a></span>
+                <span class="items-left"><span ng-bind="itemsLeftCounter"></span> items left</span>
+            </div>
         </div>
         <div class="footer" style="text-align: center">
             <p>made with ♥</p>

@@ -27,6 +27,13 @@ class TodoListResource(Resource):
         db.session.commit()
         return new, 201
 
+    def put(self):
+        tasks = Todo.query.all()
+        for task in tasks:
+            task.done = True
+        db.session.commit()
+        return '', 204
+
     def delete(self):
         if request.args.get('done'):
             to_delete = Todo.query.filter_by(done=True)

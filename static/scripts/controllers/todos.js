@@ -33,17 +33,20 @@ angular.module('todoWebApp')
         };
 
         $scope.toggleTodo = function (todo_id, index) {
-            TodoService.update(todo_id, {done: !$scope.items[index]['done']});
-            if (!$scope.items[index]['done']) {
-                $scope.itemsLeftCounter -= 1;
-            } else {
-                $scope.itemsLeftCounter += 1;
-            }
+            TodoService.update(todo_id, {done: !$scope.items[index]['done']})
+                .then(function () {
+                    $scope.items[index]['done'] = !$scope.items[index]['done'];
+                    if (!$scope.items[index]['done']) {
+                        $scope.itemsLeftCounter -= 1;
+                    } else {
+                        $scope.itemsLeftCounter += 1;
+                    }
+                });
         };
 
         $scope.removeTodo = function (todo_id, index) {
             TodoService.remove(todo_id).then(
-                function(result) {
+                function() {
                     $scope.items.splice(index, 1);
                 }
             );
@@ -55,7 +58,7 @@ angular.module('todoWebApp')
 
         $scope.doneEditingTodo = function (todo_id, index) {
             TodoService.update(todo_id, {task: $scope.items[index]['task']})
-                .then(function (result) {
+                .then(function () {
                    $scope.closeEditingTodo();
                 });
         };
@@ -66,11 +69,20 @@ angular.module('todoWebApp')
 
         $scope.clearCompleted = function () {
             TodoService.clearCompleted()
-                .then(function(result) {
+                .then(function() {
                    $scope.items = $scope.items.filter(function (el) {
                        return !el.done;
                    });
                    $scope.itemsLeftCounter = $scope.items.length;
                 });
         };
+
+        $scope.markAllComplete = function () {
+            TodoService.markAllComplete()
+                .then(function () {
+                    $scope.items.forEach(function(el) {
+                        el.done = true;
+                    });
+                });
+        }
     });

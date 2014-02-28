@@ -23,6 +23,10 @@ angular.module('todoWebApp')
 
             clearCompleted: function () {
                 return $http.delete('/api/todo?done=true');
+            },
+
+            markAllComplete: function () {
+                return $http.put('/api/todo');
             }
         }
     });
