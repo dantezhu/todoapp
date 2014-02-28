@@ -10,7 +10,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
 	// Register as a named AMD module, since jQuery can be concatenated with other
 	// files that may use define, but not via a proper concatenation script that
-	// understands anonymous AMD services. A named AMD is safest and most robust
+	// understands anonymous AMD modules. A named AMD is safest and most robust
 	// way to register. Lowercase jquery is used because AMD module names are
 	// derived from file names, and jQuery is normally delivered in a lowercase
 	// file name. Do this after creating the global so that if an AMD module wants

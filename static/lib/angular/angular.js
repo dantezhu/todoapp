@@ -1194,7 +1194,7 @@ function encodeUriQuery(val, pctEncodeSpaces) {
  *
  * You can specify an **AngularJS module** to be used as the root module for the application.  This
  * module will be loaded into the {@link AUTO.$injector} when the application is bootstrapped and
- * should contain the application code needed or have dependencies on other services that will
+ * should contain the application code needed or have dependencies on other modules that will
  * contain the code. See {@link angular.module} for more information.
  *
  * In the example below if the `ngApp` directive were not placed on the `html` element then the
@@ -1273,10 +1273,10 @@ function angularInit(element, bootstrap) {
  * They must use {@link api/ng.directive:ngApp ngApp}.
  *
  * @param {Element} element DOM element which is the root of angular application.
- * @param {Array<String|Function|Array>=} modules an array of services to load into the application.
+ * @param {Array<String|Function|Array>=} modules an array of modules to load into the application.
  *     Each item in the array should be the name of a predefined module or a (DI annotated)
  *     function that will be invoked by the injector as a run block.
- *     See: {@link angular.module services}
+ *     See: {@link angular.module modules}
  * @returns {AUTO.$injector} Returns the newly created injector for this app.
  */
 function bootstrap(element, modules) {
@@ -1439,7 +1439,7 @@ function getBlockElements(nodes) {
  * @name angular.Module
  * @description
  *
- * Interface for configuring angular {@link angular.module services}.
+ * Interface for configuring angular {@link angular.module modules}.
  */
 
 function setupModuleLoader(window) {
@@ -1453,7 +1453,7 @@ function setupModuleLoader(window) {
 
   var angular = ensure(window, 'angular', Object);
 
-  // We need to expose `angular.$$minErr` to services such as `ngResource` that reference it during bootstrap
+  // We need to expose `angular.$$minErr` to modules such as `ngResource` that reference it during bootstrap
   angular.$$minErr = angular.$$minErr || minErr;
 
   return ensure(angular, 'module', function() {
@@ -1466,8 +1466,8 @@ function setupModuleLoader(window) {
      * @description
      *
      * The `angular.module` is a global place for creating, registering and retrieving Angular
-     * services.
-     * All services (angular core or 3rd party) that should be available to an application must be
+     * modules.
+     * All modules (angular core or 3rd party) that should be available to an application must be
      * registered using this mechanism.
      *
      * When passed two or more arguments, a new module is created.  If passed only one argument, an
@@ -1493,7 +1493,7 @@ function setupModuleLoader(window) {
      * });
      * </pre>
      *
-     * Then you can create an injector and load your services like this:
+     * Then you can create an injector and load your modules like this:
      *
      * <pre>
      * var injector = angular.injector(['ng', 'MyModule'])
@@ -1548,7 +1548,7 @@ function setupModuleLoader(window) {
            * @propertyOf angular.Module
            * @returns {Array.<string>} List of module names which must be loaded before this module.
            * @description
-           * Holds the list of services which the injector will load before the current module is
+           * Holds the list of modules which the injector will load before the current module is
            * loaded.
            */
           requires: requires,
@@ -1709,7 +1709,7 @@ function setupModuleLoader(window) {
            *    Useful for application initialization.
            * @description
            * Use this method to register work which should be performed when the injector is done
-           * loading all services.
+           * loading all modules.
            */
           run: function(block) {
             runBlocks.push(block);
@@ -3029,7 +3029,7 @@ function annotate(fn) {
  *
  * `$injector` is used to retrieve object instances as defined by
  * {@link AUTO.$provide provider}, instantiate types, invoke methods,
- * and load services.
+ * and load modules.
  *
  * The following always holds true:
  *

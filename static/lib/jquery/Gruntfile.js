@@ -18,7 +18,7 @@ module.exports = function( grunt ) {
 		srcHintOptions = readOptionalJSON("src/.jshintrc");
 
 	// The concatenated file won't pass onevar
-	// But our services can
+	// But our modules can
 	delete srcHintOptions.onevar;
 
 	grunt.initConfig({
@@ -296,7 +296,7 @@ module.exports = function( grunt ) {
 	// Special concat/build task to handle various jQuery build requirements
 	grunt.registerMultiTask(
 		"build",
-		"Concatenate source (include/exclude services with +/- flags), embed date/version",
+		"Concatenate source (include/exclude modules with +/- flags), embed date/version",
 		function() {
 
 			// Concat specified files.
@@ -369,7 +369,7 @@ module.exports = function( grunt ) {
 				}
 			});
 
-			// append excluded services to version
+			// append excluded modules to version
 			if ( Object.keys( excluded ).length ) {
 				version += " -" + Object.keys( excluded ).join( ",-" );
 				// set pkg.version to version with excludes, so minified file picks it up
@@ -416,7 +416,7 @@ module.exports = function( grunt ) {
 					// Only display the inclusion/exclusion list when handling
 					// an explicit list.
 					//
-					// Additionally, only display services that have been specified
+					// Additionally, only display modules that have been specified
 					// by the user
 					if ( explicit && specified ) {
 						messages.forEach(function( message ) {

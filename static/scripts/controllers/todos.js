@@ -36,7 +36,7 @@ angular.module('todoWebApp')
             TodoService.update(todo_id, {done: !$scope.items[index]['done']})
                 .then(function () {
                     $scope.items[index]['done'] = !$scope.items[index]['done'];
-                    if (!$scope.items[index]['done']) {
+                    if ($scope.items[index]['done']) {
                         $scope.itemsLeftCounter -= 1;
                     } else {
                         $scope.itemsLeftCounter += 1;

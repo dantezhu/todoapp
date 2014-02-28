@@ -1,5 +1,3 @@
 'use strict';
 
-angular.module('todoWebApp', [
-    'ngAnimate'
-]);
+angular.module('todoWebApp', []);
