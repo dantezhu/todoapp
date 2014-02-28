@@ -23,7 +23,7 @@
         <div class="panel panel-default">
             <h1 class="title">Todos ✓</h1>
             <div class="panel-body">
-                <form class="form form-horizontal">
+                <form class="form form-horizontal" ng-submit="addTodo()">
                     <div class="form-group">
                         <div class="col-xs-10 col-sm-8 col-lg-10">
                             <input type="text" ng-enter="addTodo()" ng-model="newTodo"
