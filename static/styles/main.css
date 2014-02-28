@@ -36,6 +36,10 @@ input[type=checkbox].custom-checkbox:checked + label.custom-label {
     background-image:url(/static/images/checkbox.png);
 }
 
+.close {
+    line-height: 24px;
+}
+
 label {
     margin-bottom: 4px;
 }
