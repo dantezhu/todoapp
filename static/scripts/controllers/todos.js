@@ -26,7 +26,9 @@ angular.module('todoWebApp')
             }
             TodoService.add(task)
                 .then(function (result) {
-                    $scope.items.push(result.data);
+                    //$scope.items.push(result.data);
+                    // add by dante 插入
+                    $scope.items.splice(0, 0, result.data);
                     $scope.itemsLeftCounter += 1;
                     $scope.newTodo = '';
                 });
