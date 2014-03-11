@@ -18,7 +18,7 @@ todo_fields = {
 class TodoListResource(Resource):
     @marshal_with(todo_fields)
     def get(self):
-        return Todo.query.all()
+        return Todo.query.order_by(Todo.done, db.desc(Todo.date)).all()
 
     @marshal_with(todo_fields)
     def post(self):
