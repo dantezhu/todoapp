@@ -86,6 +86,7 @@ angular.module('todoWebApp')
                     $scope.items.forEach(function(el) {
                         el.done = true;
                     });
+                    $scope.itemsLeftCounter = 0;
                 });
         }
     });
