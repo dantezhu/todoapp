@@ -49,8 +49,10 @@ angular.module('todoWebApp')
         $scope.removeTodo = function (todo_id, index) {
             TodoService.remove(todo_id).then(
                 function() {
+                    if (!$scope.items[index]['done']) {
+                        $scope.itemsLeftCounter -= 1;
+                    }
                     $scope.items.splice(index, 1);
-                    $scope.itemsLeftCounter -= 1;
                 }
             );
         };
