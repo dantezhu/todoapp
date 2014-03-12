@@ -50,6 +50,7 @@ angular.module('todoWebApp')
             TodoService.remove(todo_id).then(
                 function() {
                     $scope.items.splice(index, 1);
+                    $scope.itemsLeftCounter -= 1;
                 }
             );
         };
